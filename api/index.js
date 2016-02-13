@@ -2,11 +2,12 @@
 var express = require('express');
 var router = express.Router();
 
+// Models
+var User = require('./models/user');
+
 
 // Routes
-router.get('/users', function (req, res) {
-	res.send('api/v0/users is working!');
-});
-
+User.methods(['get','put','post','delete']);
+User.register(router, '/users');
 
 module.exports = router;
