@@ -15,10 +15,8 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
 
-//First Route
-app.get('/', function(req, res){
-	res.send("it's working!");
-});
+// Routes
+app.use('/api/v0', require('../api'));
 
 
 // Start server
