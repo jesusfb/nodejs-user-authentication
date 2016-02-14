@@ -1,5 +1,6 @@
 var jwt    = require('jsonwebtoken');
 var express = require('express');
+var config = require('../server/config');
 //var app = express();
 module.exports=function(req, res, next) {
 
@@ -10,9 +11,9 @@ module.exports=function(req, res, next) {
   if (token) {
 
     // verifies secret and checks exp
-    jwt.verify(token, 'super-secret-token', function(err, decoded) {      
+    jwt.verify(token, config.jwtSecret, function(err, decoded) {
       if (err) {
-        return res.json({ success: false, message: 'Failed to authenticate token.' });    
+        return res.status(403).json({ success: false, message: 'Failed to verify token.' });    
       } else {
         // if everything is good, save to request for use in other routes
         req.decoded = decoded;    
@@ -24,7 +25,7 @@ module.exports=function(req, res, next) {
 
     // if there is no token
     // return an error
-    return res.status(403).send({ 
+    return res.status(403).json({ 
         success: false, 
         message: 'No token provided.' 
     });

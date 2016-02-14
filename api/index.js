@@ -17,7 +17,7 @@ router.post('/authenticate', require('./authenticate'));
 // route middleware to verify a token
 router.use(require('./authenticated'));
 
-
+router.get('/me',require('./currentUser'));
 
 User.methods(['get','put','post','delete']);
 User.register(router, '/users');

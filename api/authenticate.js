@@ -1,5 +1,8 @@
 var jwt    = require('jsonwebtoken');
 var User = require('./models/user');
+var config = require('../server/config');
+
+
 module.exports=function (req, res) {
 	User.findOne({email: req.body.email}, function(err, user) {
 		if (err) throw err;
@@ -15,7 +18,7 @@ module.exports=function (req, res) {
 
 		        // if user is found and password is right
 		        // create a token
-		        var token = jwt.sign(user, 'super-secret-token', {
+		        var token = jwt.sign(user, config.jwtSecret, {
 		          expiresIn: 24*60*60 // expires in 24 hours
 		        });
 

@@ -2,10 +2,10 @@
 var express = require('express');
 var	mongoose = require('mongoose');
 var	bodyParser = require('body-parser');
-//jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens;
+var config = require('./config');
 
 // MongoDB
-mongoose.connect('mongodb://localhost/user_service_dev');
+mongoose.connect(config.mongodbConnection);
 
 
 
