@@ -1,6 +1,7 @@
 // Dependencies
 var express = require('express');
 var router = express.Router();
+var app = express();
 //var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
 // Models
 var User = require('./models/user');
@@ -12,6 +13,11 @@ router.get('/authenticate', function (req, res) {
 });
 
 router.post('/authenticate', require('./authenticate'));
+
+// route middleware to verify a token
+router.use(require('./authenticated'));
+
+
 
 User.methods(['get','put','post','delete']);
 User.register(router, '/users');
