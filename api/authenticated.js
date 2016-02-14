@@ -1,7 +1,11 @@
+// Dependencies
+
 var jwt    = require('jsonwebtoken');
 var express = require('express');
 var config = require('../server/config');
-//var app = express();
+
+
+// Verify if token is valid
 module.exports=function(req, res, next) {
 
   // check header or url parameters or post parameters for token

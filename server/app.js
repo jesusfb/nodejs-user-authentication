@@ -3,6 +3,7 @@ var express = require('express');
 var	mongoose = require('mongoose');
 var	bodyParser = require('body-parser');
 var config = require('./config');
+var api = require('../api'); //Customized API code
 
 // MongoDB
 mongoose.connect(config.mongodbConnection);
@@ -17,7 +18,7 @@ app.use(bodyParser.json());
 
 
 // Routes
-app.use('/api/v0', require('../api'));
+app.use('/api/v0', api);
 
 
 // Start server
