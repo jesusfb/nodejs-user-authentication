@@ -13,14 +13,14 @@ module.exports=function (req, res) {
 		if (err) throw err;
 
 	    if (!user) {
-	      res.json({ success: false, message: 'Authentication failed. User not found.' });
+	      res.status(403).json({ message: 'Authentication failed. Wrong user or password.[0x001]' });
 	    } 
 	    else if (user) {
 	    	// check if password matches
 	    	encryption.comparePassword(req.body.password, user.password, function(err, match){
 	    		if (err) throw err;
 	    		if (!match) {
-        			res.status(404).json({ success: false, message: 'Authentication failed. Wrong password.' });
+        			res.status(403).json({ message: 'Authentication failed. Wrong user or password.[0x011]' });
 	      		} else {
 
 			        // if user is found and password is right
@@ -31,7 +31,6 @@ module.exports=function (req, res) {
 
 			        // return the information including token as JSON
 			        res.status(200).json({
-			          success: true,
 			          message: 'Enjoy your token!',
 			          token: token
 			        });
@@ -39,11 +38,6 @@ module.exports=function (req, res) {
 
 
 	    	})
-
-
-
-      		  
-
-    	}
+	    }
     });
 }
