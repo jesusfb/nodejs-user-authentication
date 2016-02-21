@@ -19,6 +19,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/api/v0', api);
+app.use('/swagger', express.static('swagger'));
 
 
 // Start server
