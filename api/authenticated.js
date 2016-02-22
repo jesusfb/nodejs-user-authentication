@@ -17,7 +17,7 @@ module.exports=function(req, res, next) {
     // verifies secret and checks exp
     jwt.verify(token, config.jwtSecret, function(err, decoded) {
       if (err) {
-        return res.status(403).json({ success: false, message: 'Failed to verify token.' });    
+        return res.status(403).json({ message: 'Failed to verify token or token not provided.[1x001]' });    
       } else {
         // if everything is good, save to request for use in other routes
         req.decoded = decoded;    
@@ -29,10 +29,7 @@ module.exports=function(req, res, next) {
 
     // if there is no token
     // return an error
-    return res.status(403).json({ 
-        success: false, 
-        message: 'No token provided.' 
-    });
+    return res.status(403).json({ message: 'Failed to verify token or token not provided.[1x011]' });
     
   }
 }

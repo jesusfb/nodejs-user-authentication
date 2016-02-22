@@ -25,7 +25,7 @@
 			}
 		},
 		{
-			"name":"User",
+			"name":"Users",
 			"description":"Operations about user",
 			"externalDocs":{
 				"description":"Find out more about our store",
@@ -64,23 +64,24 @@
 						}
 					}
 				],
-				"responses":
-					{
-						"403":{
-							"description":"Authentication failed. Wrong user or password."
-						},
-						"200":{
-							"description":"Authentication worked fine, and you are authenticated"
-						}
+				"responses":{
+					"403":{
+						"description":"Authentication failed. Wrong user or password."
+					},
+					"200":{
+						"description":"Authentication worked fine, and you are authenticated"
 					}
-			},
-			"put":{
+				}
+			}
+		},
+		"/me":{
+			"get":{
 				"tags":[
-					"pet"
+					"Auth"
 				],
-				"summary":"Update an existing pet",
-				"description":"",
-				"operationId":"updatePet",
+				"summary":"Returns the current user",
+				"description":"If a user is authenticated it will be return that user object",
+				"operationId":"authMe",
 				"consumes":[
 					"application/json",
 					"application/xml"
@@ -89,26 +90,38 @@
 					"application/xml",
 					"application/json"
 				],
-				"parameters":[
-					{
-						"in":"body",
-						"name":"body",
-						"description":"Pet object that needs to be added to the store",
-						"required":true,
-						"schema":{
-							"$ref":"#/definitions/Pet"
-						}
+				"responses":{
+					"403":{
+						"description":"Failed to verify token or token not provided."
+					},
+					"200":{
+						"description":"Returns the current authenticated user"
 					}
+				}
+			}
+		},
+		"/users":{
+			"get":{
+				"tags":[
+					"Users"
+				],
+				"summary":"Returns an Array of users",
+				"description":"This endpoint retuns a list of user objects",
+				"operationId":"usersList",
+				"consumes":[
+					"application/json",
+					"application/xml"
+				],
+				"produces":[
+					"application/xml",
+					"application/json"
 				],
 				"responses":{
-					"400":{
-						"description":"Invalid ID supplied"
+					"403":{
+						"description":"Failed to verify token or token not provided."
 					},
-					"404":{
-						"description":"Pet not found"
-					},
-					"405":{
-						"description":"Validation exception"
+					"200":{
+						"description":"Returns Array of user objects"
 					}
 				}
 			}
