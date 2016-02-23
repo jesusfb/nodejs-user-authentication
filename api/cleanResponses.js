@@ -1,14 +1,21 @@
 // Dependencies
 //var encryption = require('./encryption');
 
-// Encrypting password
+// Cleaning Functions
 module.exports.cleanPasswords = function (responses) {
-	var cleanResponses = [];
-  	if(responses.length>0){
-  		for (var i = 0; i < responses.length; i++) {
-  			responses[i].password=null;
-  			cleanResponses[i] = responses[i]; 
+	if(Array.isArray(responses)===true){
+		var cleanResponses = [];
+  		if(responses.length>0){
+  			for (var i = 0; i < responses.length; i++) {
+  				responses[i].password=undefined;
+  				cleanResponses[i] = responses[i]; 
+  			}
   		}
   	}
-  	return cleanResponses;
-}
+  	else{
+  		var cleanResponses = [];
+  		responses.password=undefined;
+  		var cleanResponses = responses; 
+  	}
+	return cleanResponses;
+};

@@ -34,6 +34,16 @@ User.after('get', function(req, res, next) {
   next();
 });
 
+User.after('post', function(req, res, next) {
+  res.locals.bundle = cleanResponses.cleanPasswords(res.locals.bundle);
+  next();
+});
+
+User.after('put', function(req, res, next) {
+  res.locals.bundle = cleanResponses.cleanPasswords(res.locals.bundle);
+  next();
+});
+
 
 
 User.register(router, '/users');

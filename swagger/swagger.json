@@ -116,12 +116,195 @@
 					"application/xml",
 					"application/json"
 				],
+				"parameters":[
+					{
+						"in":"query",
+						"name":"email",
+						"description":"email",
+						"type":"string"
+					},
+					{
+						"in":"query",
+						"name":"type",
+						"description":"type of user",
+						"type":"string"
+					}
+				],
 				"responses":{
 					"403":{
 						"description":"Failed to verify token or token not provided."
 					},
 					"200":{
 						"description":"Returns Array of user objects"
+					}
+				}
+			},
+			"post":{
+				"tags":[
+					"Users"
+				],
+				"summary":"Creates a user",
+				"description":"With this endpoint you can create a user",
+				"operationId":"usersCreate",
+				"consumes":[
+					"application/json",
+					"application/xml"
+				],
+				"produces":[
+					"application/xml",
+					"application/json"
+				],
+				"parameters":[
+					{
+						"in":"body",
+						"name":"body",
+						"description":"User Object",
+						"required":true,
+						"schema":{
+							"$ref":"#/definitions/UserPost"
+						}
+					}
+				],
+				"responses":{
+					"403":{
+						"description":"Failed to verify token or token not provided."
+					},
+					"201":{
+						"description":"User is created, and returns the current User"
+					},
+					"400":{
+						"description":"Error because a mandatory property is missed, or other user Error"
+					}
+				}
+			}
+		},
+		"/users/{userId}":{
+			"get":{
+				"tags":[
+					"Users"
+				],
+				"summary":"Get a user record",
+				"description":"This returns a user object putting its userId in the path",
+				"operationId":"usersFindById",
+				"consumes":[
+					"application/json",
+					"application/xml"
+				],
+				"produces":[
+					"application/xml",
+					"application/json"
+				],
+				"parameters":[
+					{
+						"name":"userId",
+						"in":"path",
+						"required":true,
+						"description":"ID of pet that needs to be updated",
+						"type":"string"
+					}
+				],
+				"responses":{
+					"403":{
+						"description":"Failed to verify token or token not provided."
+					},
+					"200":{
+						"description":"Returns a user object"
+					},
+					"404":{
+						"description":"if the user is not found"
+					},
+					"500":{
+						"description":"If Cast to ObjectId failed for value or internal server error"
+					}
+				}
+			},
+			"put":{
+				"tags":[
+					"Users"
+				],
+				"summary":"Update a user",
+				"description":"With this endpoint you can update a user object",
+				"operationId":"usersUpdate",
+				"consumes":[
+					"application/json",
+					"application/xml"
+				],
+				"produces":[
+					"application/xml",
+					"application/json"
+				],
+				"parameters":[
+					{
+						"in":"body",
+						"name":"body",
+						"description":"User Object",
+						"required":true,
+						"schema":{
+							"$ref":"#/definitions/UserPost"
+						}
+					},
+					{
+						"name":"userId",
+						"in":"path",
+						"required":true,
+						"description":"ID of pet that needs to be updated",
+						"type":"string"
+					}
+				],
+				"responses":{
+					"403":{
+						"description":"Failed to verify token or token not provided."
+					},
+					"200":{
+						"description":"User is created, and returns the current User"
+					},
+					"400":{
+						"description":"Error because a mandatory property is missed, or other user Error"
+					},
+					"404":{
+						"description":"if the user is not found"
+					},
+					"500":{
+						"description":"If Cast to ObjectId failed for value or internal server error"
+					}
+				}
+			},
+			"delete":{
+				"tags":[
+					"Users"
+				],
+				"summary":"Deletes a user record",
+				"description":"Delete a user record with its ID",
+				"operationId":"usersDelete",
+				"consumes":[
+					"application/json",
+					"application/xml"
+				],
+				"produces":[
+					"application/xml",
+					"application/json"
+				],
+				"parameters":[
+					{
+						"name":"userId",
+						"in":"path",
+						"required":true,
+						"description":"ID of pet that needs to be updated",
+						"type":"string"
+					}
+				],
+				"responses":{
+					"403":{
+						"description":"Failed to verify token or token not provided."
+					},
+					"204":{
+						"description":"The user was deleted successfully"
+					},
+					"404":{
+						"description":"if the user is not found"
+					},
+					"500":{
+						"description":"If Cast to ObjectId failed for value or internal server error"
 					}
 				}
 			}
@@ -149,6 +332,31 @@
 				"password":{
 					"type":"string",
 					"example":"test4echo"
+				}
+			},
+			"xml":{
+				"name":"Pet"
+			}
+		},
+		"UserPost":{
+			"type":"object",
+			"required":[
+				"email",
+				"password",
+				"type"
+			],
+			"properties":{
+				"email":{
+					"type":"string",
+					"example":"camilomontoya2@gmail.com"
+				},
+				"password":{
+					"type":"string",
+					"example":"test4echo"
+				},
+				"type":{
+					"type":"string",
+					"example":"admin_user"
 				}
 			},
 			"xml":{
