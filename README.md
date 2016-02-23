@@ -38,9 +38,9 @@ $ node server/app.js
 Then open the browser in http://localhost:40000/swagger/
 
 # TODO
--create seeds
--Add test framework
--Live Reload support
+- create seeds
+- Add test framework
+- Live Reload support
 
 ### Usage
 Go to the Auth tab and use the /authenticate endpoint
